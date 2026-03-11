@@ -111,7 +111,7 @@ func run(args []string) error {
 	}
 
 	if invocation.Status != ssmtypes.CommandInvocationStatusSuccess {
-		return fmt.Errorf("remote command finished with status %s", invocation.StatusDetails)
+		return fmt.Errorf("remote command finished with status %s", aws.ToString(invocation.StatusDetails))
 	}
 
 	return nil
