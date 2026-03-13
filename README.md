@@ -2,6 +2,23 @@
 
 SSM 接続のみ可能な EC2 インスタンスに対して、コマンドまたはローカルのスクリプトを実行し、標準出力・標準エラー出力を確認する Go 製 CLI です。
 
+## インストール
+
+Homebrew Tap を追加してインストールできます。
+
+```bash
+brew tap inamuu/tap
+brew install ssm-local-script
+```
+
+単発で入れる場合:
+
+```bash
+brew install inamuu/tap/ssm-local-script
+```
+
+この配布は GitHub Release のタグ `v*` 作成時に自動更新されます。
+
 ## 必要条件
 
 - Go

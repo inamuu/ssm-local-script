@@ -1,0 +1,48 @@
+version: 2
+
+project_name: ssm-local-script
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: ssm-local-script
+    main: .
+    binary: ssm-local-script
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+      - linux
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - id: default
+    ids:
+      - ssm-local-script
+    formats:
+      - tar.gz
+
+checksum:
+  name_template: checksums.txt
+
+brews:
+  - name: ssm-local-script
+    ids:
+      - default
+    repository:
+      owner: inamuu
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    homepage: https://github.com/inamuu/ssm-local-script
+    description: Run commands or local scripts on SSM-managed EC2 instances
+    directory: Formula
+    commit_author:
+      name: github-actions[bot]
+      email: 41898282+github-actions[bot]@users.noreply.github.com
+    test: |
+      output = shell_output("#{bin}/ssm-local-script 2>&1", 1)
+      assert_match "Usage:", output
